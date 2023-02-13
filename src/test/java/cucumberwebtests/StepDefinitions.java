@@ -1,35 +1,35 @@
 package cucumberwebtests;
 
-import io.cucumber.java.en.*;
-import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
-import io.cucumber.java.After;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.OutputType;
-import org.apache.commons.io.FileUtils;
+import io.cucumber.java.After;
+import io.cucumber.java.Before;
+import io.cucumber.java.Scenario;
+import io.cucumber.java.en.*;
 import java.io.File;
 import java.time.Duration;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class StepDefinitions {
 
-private WebDriver driver;
-private Scenario scenario;
+  private WebDriver driver;
+  private Scenario scenario;
 
   @Before
   public void initialization(Scenario scenario) {
     this.scenario = scenario;
 
-      ChromeOptions options = new ChromeOptions();
+    ChromeOptions options = new ChromeOptions();
     options.addArguments("--headless");
     options.addArguments("--no-sandbox");
     options.addArguments("--disable-dev-shm-usage");
@@ -46,10 +46,14 @@ private Scenario scenario;
 
   private void takeScreenshot(String filename) {
     try {
-        File screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(screenshot, new File("target/screenshots/test/" + filename + ".png"));
+      File screenshot =
+        ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+      FileUtils.copyFile(
+        screenshot,
+        new File("target/screenshots/test/" + filename + ".png")
+      );
     } catch (Exception e) {
-        e.printStackTrace();
+      e.printStackTrace();
     }
   }
 
@@ -74,7 +78,9 @@ private Scenario scenario;
   @When("tapping I'm lucky")
   public void tapping_i_m_lucky() {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-    WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.name("btnI")));
+    WebElement element = wait.until(
+      ExpectedConditions.elementToBeClickable(By.name("btnI"))
+    );
     element.click();
   }
 
